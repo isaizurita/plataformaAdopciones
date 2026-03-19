@@ -57,6 +57,7 @@ El sistema está organizado siguiendo una estructura modular basada en capas:
 
 ## 🗂️ Estructura del proyecto
 
+```
 plataformaAdopciones/
 │
 ├── src/
@@ -73,6 +74,7 @@ plataformaAdopciones/
 │
 ├── out/
 ├── README.md
+```
 
 ---
 
