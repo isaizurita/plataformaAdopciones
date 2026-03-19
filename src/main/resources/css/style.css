@@ -1,0 +1,44 @@
+/* Fondo */
+.main-bg {
+    -fx-background-color: #2F63B3;
+    -fx-padding: 40;
+}
+
+/* Título */
+.title-main {
+    -fx-text-fill: white;
+    -fx-font-size: 48px;
+    -fx-font-weight: bold;
+}
+
+/* Subtítulo */
+.subtitle {
+    -fx-text-fill: #EAF0FF;
+    -fx-font-size: 16px;
+}
+
+/* Botones tipo tarjeta */
+.card-button {
+    -fx-background-color: #5B8DE3;
+    -fx-text-fill: white;
+
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+
+    -fx-min-width: 180px;
+    -fx-min-height: 100px;
+
+    -fx-background-radius: 15;
+}
+
+/* Hover */
+.card-button:hover {
+    -fx-background-color: #4A7AD1;
+}
+
+/* Inputs */
+.text-field {
+    -fx-background-color: #EAF0FF;
+    -fx-border-radius: 6;
+    -fx-padding: 8;
+}
