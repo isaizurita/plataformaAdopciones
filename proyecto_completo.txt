@@ -1,0 +1,1112 @@
+// ===== Archivo: /Users/isaizurita/plataformaAdopciones/out/css/style.css =====
+/* Fondo */
+.main-bg {
+    -fx-background-color: #2F63B3;
+    -fx-padding: 40;
+}
+
+/* Título */
+.title-main {
+    -fx-text-fill: white;
+    -fx-font-size: 48px;
+    -fx-font-weight: bold;
+}
+
+/* Subtítulo */
+.subtitle {
+    -fx-text-fill: #EAF0FF;
+    -fx-font-size: 16px;
+}
+
+/* Botones tipo tarjeta */
+.card-button {
+    -fx-background-color: #5B8DE3;
+    -fx-text-fill: white;
+
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+
+    -fx-min-width: 180px;
+    -fx-min-height: 100px;
+
+    -fx-background-radius: 15;
+}
+
+/* Hover */
+.card-button:hover {
+    -fx-background-color: #4A7AD1;
+}
+
+/* Inputs */
+.text-field {
+    -fx-background-color: #EAF0FF;
+    -fx-border-radius: 6;
+    -fx-padding: 8;
+}
+
+// ===== Archivo: /Users/isaizurita/plataformaAdopciones/out/view/RefugioView.fxml =====
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox spacing="20" alignment="CENTER"
+      styleClass="main-bg"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.adopcion.controller.RefugioController">
+
+    <padding>
+        <Insets top="30" right="30" bottom="30" left="30"/>
+    </padding>
+
+    <!-- Título -->
+    <Label text="Gestión de Refugios"
+           styleClass="title-main"/>
+
+    <!-- Campos -->
+    <TextField fx:id="txtNombre" promptText="Nombre" styleClass="text-field"/>
+    <TextField fx:id="txtDireccion" promptText="Dirección" styleClass="text-field"/>
+    <TextField fx:id="txtTelefono" promptText="Teléfono" styleClass="text-field"/>
+
+    <!-- Botones -->
+    <HBox spacing="20" alignment="CENTER">
+
+        <Button text="Registrar"
+                onAction="#registrarRefugio"
+                styleClass="card-button"/>
+
+        <Button text="Ver Refugios"
+                onAction="#cargarRefugios"
+                styleClass="card-button"/>
+
+        <Button text="Volver"
+                onAction="#volverMenu"
+                styleClass="card-button"/>
+
+    </HBox>
+
+    <!-- Tabla SIN columnas -->
+    <TableView fx:id="tablaRefugios"
+               prefHeight="250"
+               prefWidth="500"
+               style="-fx-background-color: #EAF0FF; -fx-background-radius: 10;"/>
+
+</VBox>
+
+// ===== Archivo: /Users/isaizurita/plataformaAdopciones/out/view/MainView.fxml =====
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+
+<VBox spacing="10" alignment="CENTER" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.adopcion.controller.MascotaController">
+
+    <Label text="Gestión de Mascotas"/>
+
+    <HBox spacing="10">
+        <TextField fx:id="nombreField" promptText="Nombre"/>
+        <TextField fx:id="especieField" promptText="Especie"/>
+        <TextField fx:id="razaField" promptText="Raza"/>
+        <TextField fx:id="edadField" promptText="Edad"/>
+        <TextField fx:id="refugioIdField" promptText="Refugio ID"/>
+        <Button text="Agregar" onAction="#agregarMascota"/>
+    </HBox>
+
+    <TableView fx:id="tablaMascotas" prefHeight="300">
+        <columns>
+            <TableColumn fx:id="colId" text="ID"/>
+            <TableColumn fx:id="colNombre" text="Nombre"/>
+            <TableColumn fx:id="colEspecie" text="Especie"/>
+            <TableColumn fx:id="colRaza" text="Raza"/>
+            <TableColumn fx:id="colEdad" text="Edad"/>
+            <TableColumn fx:id="colEstado" text="Estado"/>
+            <TableColumn fx:id="colRefugio" text="Refugio"/>
+            <TableColumn fx:id="colAcciones" text="Acciones"/>
+        </columns>
+    </TableView>
+
+    <HBox spacing="10">
+        <Button text="Marcar como adoptada" onAction="#marcarAdoptada"/>
+        <Button text="Regresar" onAction="#regresar"/>
+    </HBox>
+
+    <Label fx:id="mensajeLabel"/>
+
+</VBox>
+
+// ===== Archivo: /Users/isaizurita/plataformaAdopciones/out/view/SolicitudView.fxml =====
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox spacing="10" alignment="CENTER" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.adopcion.controller.SolicitudController">
+
+    <Label text="Solicitud de Adopción"/>
+
+    <TextField fx:id="txtNombre" promptText="Tu nombre"/>
+
+    <Button text="Solicitar adopción" onAction="#solicitarAdopcion"/>
+
+</VBox>
+
+// ===== Archivo: /Users/isaizurita/plataformaAdopciones/out/view/MascotaView.fxml =====
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<VBox spacing="15" alignment="CENTER"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.adopcion.controller.MascotaController"
+      styleClass="main-bg">
+
+    <Label text="Gestión de Mascotas"
+           styleClass="title-main"/>
+
+    <TextField fx:id="nombreField" promptText="Nombre"
+               styleClass="input-field" maxWidth="700"/>
+    <TextField fx:id="especieField" promptText="Especie (perro/gato)"
+               styleClass="input-field" maxWidth="700"/>
+    <TextField fx:id="razaField" promptText="Raza"
+               styleClass="input-field" maxWidth="700"/>
+    <TextField fx:id="edadField" promptText="Edad"
+               styleClass="input-field" maxWidth="700"/>
+    <TextField fx:id="refugioIdField" promptText="ID Refugio"
+               styleClass="input-field" maxWidth="700"/>
+
+    <HBox spacing="20" alignment="CENTER">
+        <Button fx:id="btnAgregar" text="Agregar Mascota"
+                styleClass="card-button"
+                onAction="#agregarMascota"/>
+        <Button fx:id="btnAdoptada" text="Marcar como Adoptada"
+                styleClass="card-button"
+                onAction="#marcarAdoptada"/>
+        <Button fx:id="btnRegresar" text="Volver"
+                styleClass="card-button"
+                onAction="#regresar"/>
+    </HBox>
+
+    <TableView fx:id="tablaMascotas" maxWidth="700" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="colId" text="ID" prefWidth="50"/>
+            <TableColumn fx:id="colNombre" text="Nombre" prefWidth="120"/>
+            <TableColumn fx:id="colEspecie" text="Especie" prefWidth="100"/>
+            <TableColumn fx:id="colRaza" text="Raza" prefWidth="100"/>
+            <TableColumn fx:id="colEdad" text="Edad" prefWidth="60"/>
+            <TableColumn fx:id="colEstado" text="Estado" prefWidth="100"/>
+            <TableColumn fx:id="colRefugio" text="ID Refugio" prefWidth="80"/>
+        </columns>
+    </TableView>
+
+    <Label fx:id="mensajeLabel" style="-fx-text-fill: white; -fx-font-size: 13px;"/>
+</VBox>
+
+// ===== Archivo: /Users/isaizurita/plataformaAdopciones/src/main/resources/css/style.css =====
+/* Fondo */
+.main-bg {
+    -fx-background-color: #2F63B3;
+    -fx-padding: 40;
+}
+
+/* Título */
+.title-main {
+    -fx-text-fill: white;
+    -fx-font-size: 48px;
+    -fx-font-weight: bold;
+}
+
+/* Subtítulo */
+.subtitle {
+    -fx-text-fill: #EAF0FF;
+    -fx-font-size: 16px;
+}
+
+/* Botones tipo tarjeta */
+.card-button {
+    -fx-background-color: #5B8DE3;
+    -fx-text-fill: white;
+
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+
+    -fx-min-width: 180px;
+    -fx-min-height: 100px;
+
+    -fx-background-radius: 15;
+}
+
+/* Hover */
+.card-button:hover {
+    -fx-background-color: #4A7AD1;
+}
+
+/* Inputs */
+.text-field {
+    -fx-background-color: #EAF0FF;
+    -fx-border-radius: 6;
+    -fx-padding: 8;
+}
+
+// ===== Archivo: /Users/isaizurita/plataformaAdopciones/src/main/resources/view/RefugioView.fxml =====
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox spacing="20" alignment="CENTER"
+      styleClass="main-bg"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.adopcion.controller.RefugioController">
+
+    <padding>
+        <Insets top="30" right="30" bottom="30" left="30"/>
+    </padding>
+
+    <!-- Título -->
+    <Label text="Gestión de Refugios"
+           styleClass="title-main"/>
+
+    <!-- Campos -->
+    <TextField fx:id="txtNombre" promptText="Nombre" styleClass="text-field"/>
+    <TextField fx:id="txtDireccion" promptText="Dirección" styleClass="text-field"/>
+    <TextField fx:id="txtTelefono" promptText="Teléfono" styleClass="text-field"/>
+
+    <!-- Botones -->
+    <HBox spacing="20" alignment="CENTER">
+
+        <Button text="Registrar"
+                onAction="#registrarRefugio"
+                styleClass="card-button"/>
+
+        <Button text="Ver Refugios"
+                onAction="#cargarRefugios"
+                styleClass="card-button"/>
+
+        <Button text="Volver"
+                onAction="#volverMenu"
+                styleClass="card-button"/>
+
+    </HBox>
+
+    <!-- Tabla SIN columnas -->
+    <TableView fx:id="tablaRefugios"
+               prefHeight="250"
+               prefWidth="500"
+               style="-fx-background-color: #EAF0FF; -fx-background-radius: 10;"/>
+
+</VBox>
+
+// ===== Archivo: /Users/isaizurita/plataformaAdopciones/src/main/resources/view/MainView.fxml =====
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+
+<VBox spacing="10" alignment="CENTER" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.adopcion.controller.MascotaController">
+
+    <Label text="Gestión de Mascotas"/>
+
+    <HBox spacing="10">
+        <TextField fx:id="nombreField" promptText="Nombre"/>
+        <TextField fx:id="especieField" promptText="Especie"/>
+        <TextField fx:id="razaField" promptText="Raza"/>
+        <TextField fx:id="edadField" promptText="Edad"/>
+        <TextField fx:id="refugioIdField" promptText="Refugio ID"/>
+        <Button text="Agregar" onAction="#agregarMascota"/>
+    </HBox>
+
+    <TableView fx:id="tablaMascotas" prefHeight="300">
+        <columns>
+            <TableColumn fx:id="colId" text="ID"/>
+            <TableColumn fx:id="colNombre" text="Nombre"/>
+            <TableColumn fx:id="colEspecie" text="Especie"/>
+            <TableColumn fx:id="colRaza" text="Raza"/>
+            <TableColumn fx:id="colEdad" text="Edad"/>
+            <TableColumn fx:id="colEstado" text="Estado"/>
+            <TableColumn fx:id="colRefugio" text="Refugio"/>
+            <TableColumn fx:id="colAcciones" text="Acciones"/>
+        </columns>
+    </TableView>
+
+    <HBox spacing="10">
+        <Button text="Marcar como adoptada" onAction="#marcarAdoptada"/>
+        <Button text="Regresar" onAction="#regresar"/>
+    </HBox>
+
+    <Label fx:id="mensajeLabel"/>
+
+</VBox>
+
+// ===== Archivo: /Users/isaizurita/plataformaAdopciones/src/main/resources/view/SolicitudView.fxml =====
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox spacing="10" alignment="CENTER" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.adopcion.controller.SolicitudController">
+
+    <Label text="Solicitud de Adopción"/>
+
+    <TextField fx:id="txtNombre" promptText="Tu nombre"/>
+
+    <Button text="Solicitar adopción" onAction="#solicitarAdopcion"/>
+
+</VBox>
+
+// ===== Archivo: /Users/isaizurita/plataformaAdopciones/src/main/resources/view/MascotaView.fxml =====
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<VBox spacing="15" alignment="CENTER"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.adopcion.controller.MascotaController"
+      styleClass="main-bg">
+
+    <Label text="Gestión de Mascotas"
+           styleClass="title-main"/>
+
+    <TextField fx:id="nombreField" promptText="Nombre"
+               styleClass="input-field" maxWidth="700"/>
+    <TextField fx:id="especieField" promptText="Especie (perro/gato)"
+               styleClass="input-field" maxWidth="700"/>
+    <TextField fx:id="razaField" promptText="Raza"
+               styleClass="input-field" maxWidth="700"/>
+    <TextField fx:id="edadField" promptText="Edad"
+               styleClass="input-field" maxWidth="700"/>
+    <TextField fx:id="refugioIdField" promptText="ID Refugio"
+               styleClass="input-field" maxWidth="700"/>
+
+    <HBox spacing="20" alignment="CENTER">
+        <Button fx:id="btnAgregar" text="Agregar Mascota"
+                styleClass="card-button"
+                onAction="#agregarMascota"/>
+        <Button fx:id="btnAdoptada" text="Marcar como Adoptada"
+                styleClass="card-button"
+                onAction="#marcarAdoptada"/>
+        <Button fx:id="btnRegresar" text="Volver"
+                styleClass="card-button"
+                onAction="#regresar"/>
+    </HBox>
+
+    <TableView fx:id="tablaMascotas" maxWidth="700" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="colId" text="ID" prefWidth="50"/>
+            <TableColumn fx:id="colNombre" text="Nombre" prefWidth="120"/>
+            <TableColumn fx:id="colEspecie" text="Especie" prefWidth="100"/>
+            <TableColumn fx:id="colRaza" text="Raza" prefWidth="100"/>
+            <TableColumn fx:id="colEdad" text="Edad" prefWidth="60"/>
+            <TableColumn fx:id="colEstado" text="Estado" prefWidth="100"/>
+            <TableColumn fx:id="colRefugio" text="ID Refugio" prefWidth="80"/>
+        </columns>
+    </TableView>
+
+    <Label fx:id="mensajeLabel" style="-fx-text-fill: white; -fx-font-size: 13px;"/>
+</VBox>
+
+// ===== Archivo: /Users/isaizurita/plataformaAdopciones/src/main/java/com/adopcion/Main.java =====
+package com.adopcion;
+
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
+public class Main extends Application {
+
+    @Override
+    public void start(Stage stage) throws Exception {
+
+        FXMLLoader loader = new FXMLLoader(
+                getClass().getResource("/view/MainView.fxml")
+        );
+
+        Scene scene = new Scene(loader.load(), 800, 600);
+
+	scene.getStylesheets().add(
+        getClass().getResource("/css/style.css").toExternalForm()
+        );
+	
+        stage.setTitle("Sistema de Adopción de Mascotas");
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+}
+
+
+// ===== Archivo: /Users/isaizurita/plataformaAdopciones/src/main/java/com/adopcion/database/ConexionDB.java =====
+package com.adopcion.database;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+
+public class ConexionDB {
+
+    private static final String URL =
+            "jdbc:mysql://localhost:3306/adopcion_mascotas";
+
+    private static final String USER = "root";
+    private static final String PASS = "saBElo70";
+
+    public static Connection getConexion() throws Exception {
+
+        // Registrar el driver
+        Class.forName("com.mysql.cj.jdbc.Driver");
+
+        return DriverManager.getConnection(URL, USER, PASS);
+    }
+}
+
+// ===== Archivo: /Users/isaizurita/plataformaAdopciones/src/main/java/com/adopcion/dao/MascotaDAO.java =====
+package com.adopcion.dao;
+import com.adopcion.database.ConexionDB;
+import com.adopcion.model.Mascota;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+public class MascotaDAO {
+    public void agregar(Mascota m) throws Exception {
+        String sql = "INSERT INTO mascotas (nombre, especie, raza, edad, estado, refugio_id) VALUES (?, ?, ?, ?, ?, ?)";
+        try (Connection con = ConexionDB.getConexion();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, m.getNombre());
+            ps.setString(2, m.getEspecie());
+            ps.setString(3, m.getRaza());
+            ps.setInt(4, m.getEdad());
+            ps.setString(5, m.getEstado());
+            ps.setInt(6, m.getRefugioId());
+            ps.executeUpdate();
+        }
+    }
+    public List<Mascota> obtenerTodas() throws Exception {
+        List<Mascota> lista = new ArrayList<>();
+        String sql = "SELECT * FROM mascotas";
+        try (Connection con = ConexionDB.getConexion();
+             Statement st = con.createStatement();
+             ResultSet rs = st.executeQuery(sql)) {
+            while (rs.next()) {
+                Mascota m = new Mascota();
+                m.setId(rs.getInt("id"));
+                m.setNombre(rs.getString("nombre"));
+                m.setEspecie(rs.getString("especie"));
+                m.setRaza(rs.getString("raza"));
+                m.setEdad(rs.getInt("edad"));
+                m.setEstado(rs.getString("estado"));
+                m.setRefugioId(rs.getInt("refugio_id"));
+                lista.add(m);
+            }
+        }
+        return lista;
+    }
+    public void marcarAdoptada(int id) throws Exception {
+        String sql = "UPDATE mascotas SET estado = 'adoptada' WHERE id = ?";
+        try (Connection con = ConexionDB.getConexion();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setInt(1, id);
+            ps.executeUpdate();
+        }
+    }
+}
+
+// ===== Archivo: /Users/isaizurita/plataformaAdopciones/src/main/java/com/adopcion/dao/SolicitudAdopcionDAO.java =====
+package com.adopcion.dao;
+
+import com.adopcion.database.ConexionDB;
+import com.adopcion.model.SolicitudAdopcion;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+
+public class SolicitudAdopcionDAO {
+
+    public static void registrarSolicitud(SolicitudAdopcion solicitud) {
+        String sql = "INSERT INTO solicitud_adopcion (id_adoptante, id_mascota) VALUES (?, ?)";
+
+        try (Connection conn = ConexionDB.getConexion();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            // ⚠️ aquí necesitas el id del adoptante (por ahora puedes poner fijo)
+            stmt.setInt(1, 1); // adoptante dummy
+            stmt.setInt(2, solicitud.getIdMascota());
+
+            stmt.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+// ===== Archivo: /Users/isaizurita/plataformaAdopciones/src/main/java/com/adopcion/dao/RefugioDAO.java =====
+package com.adopcion.dao;
+
+import com.adopcion.database.ConexionDB;
+import com.adopcion.model.Refugio;
+
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+
+public class RefugioDAO {
+
+    public void guardar(Refugio refugio) throws Exception {
+
+        Connection conn = ConexionDB.getConexion();
+
+        String sql =
+        "INSERT INTO refugio(nombre,direccion,telefono) VALUES(?,?,?)";
+
+        PreparedStatement ps = conn.prepareStatement(sql);
+
+        ps.setString(1, refugio.getNombre());
+        ps.setString(2, refugio.getDireccion());
+        ps.setString(3, refugio.getTelefono());
+
+        ps.executeUpdate();
+    }
+
+    public List<Refugio> obtenerTodos() throws Exception {
+
+        List<Refugio> lista = new ArrayList<>();
+
+        Connection conn = ConexionDB.getConexion();
+
+        Statement st = conn.createStatement();
+
+        ResultSet rs = st.executeQuery("SELECT * FROM refugio");
+
+        while(rs.next()){
+
+            Refugio r = new Refugio();
+
+            r.setId(rs.getInt("id_refugio"));
+            r.setNombre(rs.getString("nombre"));
+            r.setDireccion(rs.getString("direccion"));
+            r.setTelefono(rs.getString("telefono"));
+
+            lista.add(r);
+        }
+
+        return lista;
+    }
+}
+
+// ===== Archivo: /Users/isaizurita/plataformaAdopciones/src/main/java/com/adopcion/dao/AdoptanteDAO.java =====
+
+
+// ===== Archivo: /Users/isaizurita/plataformaAdopciones/src/main/java/com/adopcion/controller/RefugioController.java =====
+package com.adopcion.controller;
+
+import com.adopcion.dao.RefugioDAO;
+import com.adopcion.model.Refugio;
+
+import javafx.fxml.FXML;
+import javafx.scene.control.*;
+import javafx.collections.*;
+
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import javafx.event.ActionEvent;
+import javafx.scene.Node;
+import javafx.scene.control.cell.PropertyValueFactory;
+
+public class RefugioController {
+
+    @FXML private TextField txtNombre;
+    @FXML private TextField txtDireccion;
+    @FXML private TextField txtTelefono;
+    @FXML private TableView<Refugio> tablaRefugios;
+
+    private RefugioDAO dao = new RefugioDAO();
+
+    // 🔥 Se ejecuta al abrir la vista
+    @FXML
+    public void initialize() {
+
+        TableColumn<Refugio, String> colNombre = new TableColumn<>("Nombre");
+        colNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+
+        TableColumn<Refugio, String> colDireccion = new TableColumn<>("Dirección");
+        colDireccion.setCellValueFactory(new PropertyValueFactory<>("direccion"));
+
+        TableColumn<Refugio, String> colTelefono = new TableColumn<>("Teléfono");
+        colTelefono.setCellValueFactory(new PropertyValueFactory<>("telefono"));
+
+        tablaRefugios.getColumns().addAll(colNombre, colDireccion, colTelefono);
+    }
+
+    // =========================
+    @FXML
+    public void registrarRefugio(ActionEvent event) {
+        try {
+
+            Refugio r = new Refugio(
+                    txtNombre.getText(),
+                    txtDireccion.getText(),
+                    txtTelefono.getText()
+            );
+
+            dao.guardar(r);
+
+            mostrarMensaje("Refugio registrado correctamente");
+
+            limpiarCampos();
+
+        } catch (Exception e) {
+            mostrarMensaje("Error: " + e.getMessage());
+        }
+    }
+
+    // =========================
+    @FXML
+    public void cargarRefugios(ActionEvent event) {
+
+        try {
+
+            ObservableList<Refugio> lista =
+                    FXCollections.observableArrayList(dao.obtenerTodos());
+
+            tablaRefugios.setItems(lista);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    // =========================
+    @FXML
+    public void volverMenu(ActionEvent event) {
+
+        try {
+
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/view/MainView.fxml")
+            );
+
+            Parent root = loader.load();
+
+            Stage stage = (Stage) ((Node) event.getSource())
+                    .getScene().getWindow();
+
+            Scene scene = new Scene(root, 800, 600);
+
+            scene.getStylesheets().add(
+                    getClass().getResource("/css/style.css").toExternalForm()
+            );
+
+            stage.setScene(scene);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    // =========================
+    private void limpiarCampos() {
+        txtNombre.clear();
+        txtDireccion.clear();
+        txtTelefono.clear();
+    }
+
+    private void mostrarMensaje(String msg) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setHeaderText(null);
+        alert.setContentText(msg);
+        alert.showAndWait();
+    }
+}
+
+// ===== Archivo: /Users/isaizurita/plataformaAdopciones/src/main/java/com/adopcion/controller/SolicitudController.java =====
+package com.adopcion.controller;
+
+import com.adopcion.dao.SolicitudAdopcionDAO;
+import com.adopcion.model.SolicitudAdopcion;
+import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.TextField;
+
+public class SolicitudController {
+
+    @FXML
+    private TextField txtNombre;
+
+    private int idMascotaSeleccionada;
+
+    public void setMascota(int idMascota) {
+        this.idMascotaSeleccionada = idMascota;
+    }
+
+    @FXML
+    private void solicitarAdopcion() {
+        String nombre = txtNombre.getText();
+
+        if (nombre.isEmpty()) {
+            mostrarAlerta("Error", "Ingresa tu nombre");
+            return;
+        }
+
+        SolicitudAdopcion solicitud = new SolicitudAdopcion(idMascotaSeleccionada, nombre);
+        SolicitudAdopcionDAO.registrarSolicitud(solicitud);
+
+        mostrarAlerta("Éxito", "Solicitud registrada correctamente");
+        txtNombre.clear();
+    }
+
+    private void mostrarAlerta(String titulo, String mensaje) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(titulo);
+        alert.setContentText(mensaje);
+        alert.showAndWait();
+    }
+}
+
+// ===== Archivo: /Users/isaizurita/plataformaAdopciones/src/main/java/com/adopcion/controller/MainController.java =====
+package com.adopcion.controller;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import javafx.event.ActionEvent;
+import javafx.scene.Node;
+public class MainController {
+    @FXML
+    public void abrirRefugios(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/view/RefugioView.fxml")
+            );
+            Parent root = loader.load();
+            Stage stage = (Stage) ((Node) event.getSource())
+                    .getScene().getWindow();
+            Scene scene = new Scene(root, 800, 600);
+            scene.getStylesheets().add(
+                    getClass().getResource("/css/style.css").toExternalForm()
+            );
+            stage.setScene(scene);
+            stage.setTitle("Refugios");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    public void abrirMascotas(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/view/MascotaView.fxml")
+            );
+            Parent root = loader.load();
+            Stage stage = (Stage) ((Node) event.getSource())
+                    .getScene().getWindow();
+            Scene scene = new Scene(root, 800, 600);
+            scene.getStylesheets().add(
+                    getClass().getResource("/css/style.css").toExternalForm()
+            );
+            stage.setScene(scene);
+            stage.setTitle("Mascotas");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+// ===== Archivo: /Users/isaizurita/plataformaAdopciones/src/main/java/com/adopcion/controller/MascotaController.java =====
+package com.adopcion.controller;
+
+import com.adopcion.dao.MascotaDAO;
+import com.adopcion.model.Mascota;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.Parent;
+import javafx.stage.Stage;
+
+public class MascotaController {
+
+    @FXML private TextField nombreField;
+    @FXML private TextField especieField;
+    @FXML private TextField razaField;
+    @FXML private TextField edadField;
+    @FXML private TextField refugioIdField;
+
+    @FXML private TableView<Mascota> tablaMascotas;
+    @FXML private TableColumn<Mascota, Integer> colId;
+    @FXML private TableColumn<Mascota, String> colNombre;
+    @FXML private TableColumn<Mascota, String> colEspecie;
+    @FXML private TableColumn<Mascota, String> colRaza;
+    @FXML private TableColumn<Mascota, Integer> colEdad;
+    @FXML private TableColumn<Mascota, String> colEstado;
+    @FXML private TableColumn<Mascota, Integer> colRefugio;
+
+    // 🔥 NUEVA COLUMNA
+    @FXML private TableColumn<Mascota, Void> colAcciones;
+
+    @FXML private Label mensajeLabel;
+
+    private MascotaDAO dao = new MascotaDAO();
+
+    @FXML
+    public void initialize() {
+        colId.setCellValueFactory(new PropertyValueFactory<>("id"));
+        colNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+        colEspecie.setCellValueFactory(new PropertyValueFactory<>("especie"));
+        colRaza.setCellValueFactory(new PropertyValueFactory<>("raza"));
+        colEdad.setCellValueFactory(new PropertyValueFactory<>("edad"));
+        colEstado.setCellValueFactory(new PropertyValueFactory<>("estado"));
+        colRefugio.setCellValueFactory(new PropertyValueFactory<>("refugioId"));
+
+        // 🔥 BOTÓN "ADOPTAR"
+        colAcciones.setCellFactory(param -> new TableCell<>() {
+            private final Button btn = new Button("Adoptar");
+
+            {
+                btn.setOnAction(event -> {
+                    Mascota mascota = getTableView().getItems().get(getIndex());
+                    abrirSolicitud(mascota);
+                });
+            }
+
+            @Override
+            protected void updateItem(Void item, boolean empty) {
+                super.updateItem(item, empty);
+                setGraphic(empty ? null : btn);
+            }
+        });
+
+        cargarMascotas();
+    }
+
+    private void cargarMascotas() {
+        try {
+            ObservableList<Mascota> lista = FXCollections.observableArrayList(dao.obtenerTodas());
+            tablaMascotas.setItems(lista);
+        } catch (Exception e) {
+            mensajeLabel.setText("Error al cargar mascotas: " + e.getMessage());
+        }
+    }
+
+    @FXML
+    private void agregarMascota() {
+        try {
+            Mascota m = new Mascota(
+                nombreField.getText(),
+                especieField.getText(),
+                razaField.getText(),
+                Integer.parseInt(edadField.getText()),
+                "disponible",
+                Integer.parseInt(refugioIdField.getText())
+            );
+            dao.agregar(m);
+            mensajeLabel.setText("✅ Mascota agregada correctamente.");
+            limpiarCampos();
+            cargarMascotas();
+        } catch (Exception e) {
+            mensajeLabel.setText("❌ Error: " + e.getMessage());
+        }
+    }
+
+    @FXML
+    private void marcarAdoptada() {
+        Mascota seleccionada = tablaMascotas.getSelectionModel().getSelectedItem();
+        if (seleccionada == null) {
+            mensajeLabel.setText("⚠️ Selecciona una mascota de la tabla.");
+            return;
+        }
+        try {
+            dao.marcarAdoptada(seleccionada.getId());
+            mensajeLabel.setText("✅ Mascota marcada como adoptada.");
+            cargarMascotas();
+        } catch (Exception e) {
+            mensajeLabel.setText("❌ Error: " + e.getMessage());
+        }
+    }
+
+    @FXML
+    private void regresar() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/MainView.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) tablaMascotas.getScene().getWindow();
+            Scene scene = new Scene(root, 800, 600);
+            scene.getStylesheets().add(
+                getClass().getResource("/css/style.css").toExternalForm()
+            );
+            stage.setScene(scene);
+            stage.setTitle("Sistema de Adopción de Mascotas");
+        } catch (Exception e) {
+            mensajeLabel.setText("❌ Error al regresar: " + e.getMessage());
+        }
+    }
+
+    // 🔥 MÉTODO CLAVE HU-05
+    private void abrirSolicitud(Mascota mascota) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/SolicitudView.fxml"));
+            Parent root = loader.load();
+
+            SolicitudController controller = loader.getController();
+            controller.setMascota(mascota.getId());
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Solicitar adopción");
+            stage.show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void limpiarCampos() {
+        nombreField.clear();
+        especieField.clear();
+        razaField.clear();
+        edadField.clear();
+        refugioIdField.clear();
+    }
+}
+
+// ===== Archivo: /Users/isaizurita/plataformaAdopciones/src/main/java/com/adopcion/model/Mascota.java =====
+package com.adopcion.model;
+
+public class Mascota {
+    private int id;
+    private String nombre;
+    private String especie;
+    private String raza;
+    private int edad;
+    private String estado; // "disponible" o "adoptada"
+    private int refugioId;
+
+    public Mascota() {}
+
+    public Mascota(String nombre, String especie, String raza, int edad, String estado, int refugioId) {
+        this.nombre = nombre;
+        this.especie = especie;
+        this.raza = raza;
+        this.edad = edad;
+        this.estado = estado;
+        this.refugioId = refugioId;
+    }
+
+    public int getId() { return id; }
+    public void setId(int id) { this.id = id; }
+    public String getNombre() { return nombre; }
+    public void setNombre(String nombre) { this.nombre = nombre; }
+    public String getEspecie() { return especie; }
+    public void setEspecie(String especie) { this.especie = especie; }
+    public String getRaza() { return raza; }
+    public void setRaza(String raza) { this.raza = raza; }
+    public int getEdad() { return edad; }
+    public void setEdad(int edad) { this.edad = edad; }
+    public String getEstado() { return estado; }
+    public void setEstado(String estado) { this.estado = estado; }
+    public int getRefugioId() { return refugioId; }
+    public void setRefugioId(int refugioId) { this.refugioId = refugioId; }
+
+    @Override
+    public String toString() { return nombre; }
+}
+
+// ===== Archivo: /Users/isaizurita/plataformaAdopciones/src/main/java/com/adopcion/model/SolicitudAdopcion.java =====
+package com.adopcion.model;
+
+import java.time.LocalDate;
+
+public class SolicitudAdopcion {
+    private int id;
+    private int idMascota;
+    private String nombreSolicitante;
+    private LocalDate fecha;
+
+    public SolicitudAdopcion(int idMascota, String nombreSolicitante) {
+        this.idMascota = idMascota;
+        this.nombreSolicitante = nombreSolicitante;
+        this.fecha = LocalDate.now();
+    }
+
+    public int getIdMascota() {
+        return idMascota;
+    }
+
+    public String getNombreSolicitante() {
+        return nombreSolicitante;
+    }
+
+    public LocalDate getFecha() {
+        return fecha;
+    }
+}
+
+// ===== Archivo: /Users/isaizurita/plataformaAdopciones/src/main/java/com/adopcion/model/Adoptante.java =====
+
+
+// ===== Archivo: /Users/isaizurita/plataformaAdopciones/src/main/java/com/adopcion/model/Refugio.java =====
+package com.adopcion.model;
+
+public class Refugio {
+
+    private int id;
+    private String nombre;
+    private String direccion;
+    private String telefono;
+
+    public Refugio() {}
+
+    public Refugio(String nombre, String direccion, String telefono) {
+        this.nombre = nombre;
+        this.direccion = direccion;
+        this.telefono = telefono;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+}
+

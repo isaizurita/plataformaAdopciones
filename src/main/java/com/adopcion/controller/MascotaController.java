@@ -19,6 +19,7 @@ public class MascotaController {
     @FXML private TextField razaField;
     @FXML private TextField edadField;
     @FXML private TextField refugioIdField;
+
     @FXML private TableView<Mascota> tablaMascotas;
     @FXML private TableColumn<Mascota, Integer> colId;
     @FXML private TableColumn<Mascota, String> colNombre;
@@ -27,6 +28,10 @@ public class MascotaController {
     @FXML private TableColumn<Mascota, Integer> colEdad;
     @FXML private TableColumn<Mascota, String> colEstado;
     @FXML private TableColumn<Mascota, Integer> colRefugio;
+
+    // 🔥 NUEVA COLUMNA
+    @FXML private TableColumn<Mascota, Void> colAcciones;
+
     @FXML private Label mensajeLabel;
 
     private MascotaDAO dao = new MascotaDAO();
@@ -40,6 +45,25 @@ public class MascotaController {
         colEdad.setCellValueFactory(new PropertyValueFactory<>("edad"));
         colEstado.setCellValueFactory(new PropertyValueFactory<>("estado"));
         colRefugio.setCellValueFactory(new PropertyValueFactory<>("refugioId"));
+
+        // 🔥 BOTÓN "ADOPTAR"
+        colAcciones.setCellFactory(param -> new TableCell<>() {
+            private final Button btn = new Button("Adoptar");
+
+            {
+                btn.setOnAction(event -> {
+                    Mascota mascota = getTableView().getItems().get(getIndex());
+                    abrirSolicitud(mascota);
+                });
+            }
+
+            @Override
+            protected void updateItem(Void item, boolean empty) {
+                super.updateItem(item, empty);
+                setGraphic(empty ? null : btn);
+            }
+        });
+
         cargarMascotas();
     }
 
@@ -103,7 +127,26 @@ public class MascotaController {
         } catch (Exception e) {
             mensajeLabel.setText("❌ Error al regresar: " + e.getMessage());
         }
-}
+    }
+
+    // 🔥 MÉTODO CLAVE HU-05
+    private void abrirSolicitud(Mascota mascota) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/SolicitudView.fxml"));
+            Parent root = loader.load();
+
+            SolicitudController controller = loader.getController();
+            controller.setMascota(mascota.getId());
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Solicitar adopción");
+            stage.show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     private void limpiarCampos() {
         nombreField.clear();

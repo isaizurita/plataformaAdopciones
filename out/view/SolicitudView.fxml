@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox spacing="10" alignment="CENTER" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.adopcion.controller.SolicitudController">
+
+    <Label text="Solicitud de Adopción"/>
+
+    <TextField fx:id="txtNombre" promptText="Tu nombre"/>
+
+    <Button text="Solicitar adopción" onAction="#solicitarAdopcion"/>
+
+</VBox>

@@ -9,7 +9,7 @@ public class ConexionDB {
             "jdbc:mysql://localhost:3306/adopcion_mascotas";
 
     private static final String USER = "root";
-    private static final String PASS = "";
+    private static final String PASS = "saBElo70";
 
     public static Connection getConexion() throws Exception {
 

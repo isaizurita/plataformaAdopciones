@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox spacing="20" alignment="CENTER"
+      styleClass="main-bg"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.adopcion.controller.RefugioController">
+
+    <padding>
+        <Insets top="30" right="30" bottom="30" left="30"/>
+    </padding>
+
+    <!-- Título -->
+    <Label text="Gestión de Refugios"
+           styleClass="title-main"/>
+
+    <!-- Campos -->
+    <TextField fx:id="txtNombre" promptText="Nombre" styleClass="text-field"/>
+    <TextField fx:id="txtDireccion" promptText="Dirección" styleClass="text-field"/>
+    <TextField fx:id="txtTelefono" promptText="Teléfono" styleClass="text-field"/>
+
+    <!-- Botones -->
+    <HBox spacing="20" alignment="CENTER">
+
+        <Button text="Registrar"
+                onAction="#registrarRefugio"
+                styleClass="card-button"/>
+
+        <Button text="Ver Refugios"
+                onAction="#cargarRefugios"
+                styleClass="card-button"/>
+
+        <Button text="Volver"
+                onAction="#volverMenu"
+                styleClass="card-button"/>
+
+    </HBox>
+
+    <!-- Tabla SIN columnas -->
+    <TableView fx:id="tablaRefugios"
+               prefHeight="250"
+               prefWidth="500"
+               style="-fx-background-color: #EAF0FF; -fx-background-radius: 10;"/>
+
+</VBox>
