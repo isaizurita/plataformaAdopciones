@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<VBox spacing="15" alignment="CENTER"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.adopcion.controller.MascotaController"
+      styleClass="main-bg">
+
+    <Label text="Gestión de Mascotas"
+           styleClass="title-main"/>
+
+    <TextField fx:id="nombreField" promptText="Nombre"
+               styleClass="input-field" maxWidth="700"/>
+    <TextField fx:id="especieField" promptText="Especie (perro/gato)"
+               styleClass="input-field" maxWidth="700"/>
+    <TextField fx:id="razaField" promptText="Raza"
+               styleClass="input-field" maxWidth="700"/>
+    <TextField fx:id="edadField" promptText="Edad"
+               styleClass="input-field" maxWidth="700"/>
+    <TextField fx:id="refugioIdField" promptText="ID Refugio"
+               styleClass="input-field" maxWidth="700"/>
+
+    <HBox spacing="20" alignment="CENTER">
+        <Button fx:id="btnAgregar" text="Agregar Mascota"
+                styleClass="card-button"
+                onAction="#agregarMascota"/>
+        <Button fx:id="btnAdoptada" text="Marcar como Adoptada"
+                styleClass="card-button"
+                onAction="#marcarAdoptada"/>
+        <Button fx:id="btnRegresar" text="Volver"
+                styleClass="card-button"
+                onAction="#regresar"/>
+    </HBox>
+
+    <TableView fx:id="tablaMascotas" maxWidth="700" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="colId" text="ID" prefWidth="50"/>
+            <TableColumn fx:id="colNombre" text="Nombre" prefWidth="120"/>
+            <TableColumn fx:id="colEspecie" text="Especie" prefWidth="100"/>
+            <TableColumn fx:id="colRaza" text="Raza" prefWidth="100"/>
+            <TableColumn fx:id="colEdad" text="Edad" prefWidth="60"/>
+            <TableColumn fx:id="colEstado" text="Estado" prefWidth="100"/>
+            <TableColumn fx:id="colRefugio" text="ID Refugio" prefWidth="80"/>
+        </columns>
+    </TableView>
+
+    <Label fx:id="mensajeLabel" style="-fx-text-fill: white; -fx-font-size: 13px;"/>
+</VBox>
